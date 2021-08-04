@@ -21,13 +21,18 @@ if (process.env.NODE_ENV !== 'development'){
   app.use(express.static('public'))
 }
 
-/* Controller Goes Here Remove the tes*/
-app.get('/test', (req, res)=>{
-	res.status(200).json({
-		website: 'My Website',
-		info: 'Not that much'
-	})
+/* Controller Goes Here Remove the test*/
+// Create
+app.post('/api/bookmarks', (req, res) => {
+  res.json(req.body)
 })
+
+// Read
+
+// Update
+
+// Delete
+
 /* Controller Ends here */
 //LISTENER
 
