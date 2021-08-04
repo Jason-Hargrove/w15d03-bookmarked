@@ -22,16 +22,31 @@ if (process.env.NODE_ENV !== 'development'){
 }
 
 /* Controller Goes Here Remove the test*/
-// Create
+//  ===== Create =====
 app.post('/api/bookmarks', (req, res) => {
   res.json(req.body)
 })
 
-// Read
+// ===== Read =====
+  // Index
+  app.get('/api/bookmarks', (req, res) => {
+    res.json({"route": 'index'})
+  })
 
-// Update
+  // Show
+  app.get('/api/bookmarks/:id', (req, res) => {
+    res.json({"route": 'show'})
+  })
 
-// Delete
+// ===== Update =====
+app.put('/api/bookmarks/:id', (req, res) => {
+  res.json(req.body)
+})
+
+// ===== Delete =====
+app.delete('/api/bookmarks/:id', (req, res) => {
+  res.json({"route": 'delete'})
+})
 
 /* Controller Ends here */
 //LISTENER
