@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 8000;
 const mongoose = require('mongoose');
+const Bookmark = require('./models/bookmark')
 const path = require('path');
 
 const MONGODB_URI = process.env.MONGODB_URI
@@ -23,8 +24,14 @@ if (process.env.NODE_ENV !== 'development'){
 
 /* Controller Goes Here Remove the test*/
 //  ===== Create =====
-app.post('/api/bookmarks', (req, res) => {
-  res.json(req.body)
+app.post('/api/bookmarks', async (req, res) => {
+  try {
+    const createdBookmark = await Bookmark.create(req.body)
+    res.status(200).json(createdBookmark)
+  } catch (error) {
+    console.error(error) // <---- For the Backend Developer.
+    res.status(400).json({message: error.message}) // <---- For the Front End Developer.
+  }
 })
 
 // ===== Read =====
