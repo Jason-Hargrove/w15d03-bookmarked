@@ -24,11 +24,12 @@ export default function App(props) {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({
-					name: 'GitHub',
+					title: 'GitHub',
 					url: 'https://github.com/'
 				})
 			});
 			const data = await response.json();
+			setBookmarks([...bookmarks, data]);
 			setBookmark(data);
 		} catch (error) {
 			console.error(error);
@@ -42,7 +43,8 @@ export default function App(props) {
 				{bookmarks.map(bookmark => {
 					return (
 						<li key={bookmark._id}>
-							The bookmark is {bookmark.title} its link is {bookmark.url}
+							The bookmark is {bookmark.title} its link is{' '}
+							<a href={bookmark.url}>{bookmark.url}</a>
 						</li>
 					);
 				})}
