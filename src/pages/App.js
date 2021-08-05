@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 
 export default function App(props) {
 	const [bookmarks, setBookmarks] = useState([]);
-	const [singleBookmark, setBookmark] = useState({});
+	const [singleBookmark, setBookmark] = useState({
+		title: '',
+		url: ''
+	});
 
 	useEffect(() => {
 		(async () => {
@@ -36,9 +39,36 @@ export default function App(props) {
 		}
 	};
 
+	const handleSubmit = async e => {
+		e.preventDefault();
+		try {
+			const response = await fetch('/api/bookmarks', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(singleBookmark)
+			})
+			const data = await response.json()
+			setBookmarks([...bookmarks, data])
+		} catch (error) {
+			console.error(error)
+		}
+	};
+
+	const handleChange = e => {
+		setBookmark({...bookmarks, [e.target.id]:e.target.value})
+	};
+
 	return (
 		<div className="AppPage">
 			This is the {props.page} page
+
+			<form onSubmit={handleSubmit}>
+			<input type="text" id="title" value={singleBookmark.title} onChange={handleChange} />
+			<input type="text" id="url" value={singleBookmark.url} onChange={handleChange}/>
+			<input type="submit" value="Submit" />
+			</form>
 			<ul>
 				{bookmarks.map(bookmark => {
 					return (
@@ -49,7 +79,6 @@ export default function App(props) {
 					);
 				})}
 			</ul>
-			<button onClick={handleClick}>CLICK ME TO MAKE A BOOKMARK</button>
 		</div>
 	);
 }
