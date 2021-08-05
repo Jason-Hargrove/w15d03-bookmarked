@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 export default function App(props) {
 	const [bookmarks, setBookmarks] = useState([]);
+	const [singleBookmark, setBookmark] = useState({});
 
 	useEffect(() => {
 		(async () => {
@@ -9,9 +10,30 @@ export default function App(props) {
 				const response = await fetch('/api/bookmarks'); // <----- Postman Querry
 				const data = await response.json(); // Recieved data turn it into a js object.
 				setBookmarks(data); // Store JS object or Array.
-			} catch (error) {}
+			} catch (error) {
+				console.error(error);
+			}
 		})();
 	}, []);
+
+	const handleClick = async e => {
+		try {
+			const response = await fetch('/api/bookmarks', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					name: 'GitHub',
+					url: 'https://github.com/'
+				})
+			});
+			const data = await response.json();
+			setBookmark(data);
+		} catch (error) {
+			console.error(error);
+		}
+	};
 
 	return (
 		<div className="AppPage">
@@ -25,6 +47,7 @@ export default function App(props) {
 					);
 				})}
 			</ul>
+			<button onClick={handleClick}>CLICK ME TO MAKE A BOOKMARK</button>
 		</div>
 	);
 }
