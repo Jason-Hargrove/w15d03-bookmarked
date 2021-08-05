@@ -27,6 +27,7 @@ if (process.env.NODE_ENV !== 'development'){
 app.post('/api/bookmarks', async (req, res) => {
   try {
     const createdBookmark = await Bookmark.create(req.body)
+    console.log(createdBookmark)
     res.status(200).json(createdBookmark)
   } catch (error) {
     console.error(error) // <---- For the Backend Developer.
@@ -36,13 +37,25 @@ app.post('/api/bookmarks', async (req, res) => {
 
 // ===== Read =====
   // Index
-  app.get('/api/bookmarks', (req, res) => {
-    res.json({"route": 'index'})
+  app.get('/api/bookmarks', async (req, res) => {
+    try {
+      const foundBookmarks = await Bookmark.find({})
+      res.status(200).json(foundBookmarks)
+    } catch (error) {
+      console.error(error)
+      res.status(404).json({message: error.message})
+    }
   })
 
   // Show
-  app.get('/api/bookmarks/:id', (req, res) => {
-    res.json({"route": 'show'})
+  app.get('/api/bookmarks/:id', async (req, res) => {
+    try {
+      const foundBookmark = await Bookmark.findById(req.params.id)
+      res.status(200).json(foundBookmark)
+    } catch (error) {
+      console.error(error)
+      res.status(404).json({message: error.message})
+    }
   })
 
 // ===== Update =====
