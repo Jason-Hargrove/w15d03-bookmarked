@@ -3,8 +3,8 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 8000;
 const mongoose = require('mongoose');
-const Bookmark = require('./models/bookmark')
 const path = require('path');
+const bookmarkController = require('./controllers/bookmarks')
 
 const MONGODB_URI = process.env.MONGODB_URI
 const db = mongoose.connection;
@@ -22,57 +22,9 @@ if (process.env.NODE_ENV !== 'development'){
   app.use(express.static('public'))
 }
 
-/* Controller Goes Here Remove the test*/
-
-// ==================== Begin 1st controler ====================
-
-// //  ===== Create =====
-// app.post('/api/bookmarks', async (req, res) => {
-//   try {
-//     const createdBookmark = await Bookmark.create(req.body)
-//     res.status(200).json(createdBookmark)
-//   } catch (error) {
-//     console.error(error) // <---- For the Backend Developer.
-//     res.status(404).json({message: error.message}) // <---- For the Front End Developer.
-//   }
-// })
-//
-// // ===== Read =====
-//   // Index
-//   app.get('/api/bookmarks', async (req, res) => {
-//     try {
-//       const foundBookmarks = await Bookmark.find({})
-//       res.status(200).json(foundBookmarks)
-//     } catch (error) {
-//       console.error(error)
-//       res.status(404).json({message: error.message})
-//     }
-//   })
-//
-//   // Show
-//   app.get('/api/bookmarks/:id', async (req, res) => {
-//     try {
-//       const foundBookmark = await Bookmark.findById(req.params.id)
-//       res.status(200).json(foundBookmark)
-//     } catch (error) {
-//       console.error(error)
-//       res.status(404).json({message: error.message})
-//     }
-//   })
-//
-// // ===== Update =====
-// app.put('/api/bookmarks/:id', (req, res) => {
-//   res.json(req.body)
-// })
-//
-// // ===== Delete =====
-// app.delete('/api/bookmarks/:id', (req, res) => {
-//   res.json({"route": 'delete'})
-// })
-
+/* Controller Goes Here*/
+app.use('/api/bookmark', bookmarkController)
 /* Controller Ends here */
-
-/* ==================== Controller Ends here ================== */
 
 //LISTENER
 
