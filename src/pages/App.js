@@ -48,26 +48,39 @@ export default function App(props) {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify(singleBookmark)
-			})
-			const data = await response.json()
-			setBookmarks([...bookmarks, data])
+			});
+			const data = await response.json();
+			setBookmarks([...bookmarks, data]);
+			setBookmark({
+				title: '',
+				url: ''
+			});
 		} catch (error) {
-			console.error(error)
+			console.error(error);
 		}
 	};
 
 	const handleChange = e => {
-		setBookmark({...bookmarks, [e.target.id]:e.target.value})
+		setBookmark({ ...singleBookmark, [e.target.id]: e.target.value });
 	};
 
 	return (
 		<div className="AppPage">
 			This is the {props.page} page
-
 			<form onSubmit={handleSubmit}>
-			<input type="text" id="title" value={singleBookmark.title} onChange={handleChange} />
-			<input type="text" id="url" value={singleBookmark.url} onChange={handleChange}/>
-			<input type="submit" value="Submit" />
+				<input
+					type="text"
+					id="title"
+					value={singleBookmark.title}
+					onChange={handleChange}
+				/>
+				<input
+					type="text"
+					id="url"
+					value={singleBookmark.url}
+					onChange={handleChange}
+				/>
+				<input type="submit" value="Submit" />
 			</form>
 			<ul>
 				{bookmarks.map(bookmark => {

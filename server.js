@@ -27,11 +27,10 @@ if (process.env.NODE_ENV !== 'development'){
 app.post('/api/bookmarks', async (req, res) => {
   try {
     const createdBookmark = await Bookmark.create(req.body)
-    console.log(createdBookmark)
     res.status(200).json(createdBookmark)
   } catch (error) {
     console.error(error) // <---- For the Backend Developer.
-    res.status(400).json({message: error.message}) // <---- For the Front End Developer.
+    res.status(404).json({message: error.message}) // <---- For the Front End Developer.
   }
 })
 
