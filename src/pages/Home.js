@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Home(props) {
-	const [bookmarks, setBookmarks] = useState([]);
+	const [bookmarks, setBookmarks] = useState([]); // <----- Bookmarks State
 
+	// ↓↓↓↓↓↓ After the component mounts ↓↓↓↓↓
+	// Fetch all blog posts with the nasty looking string. Turns it into an object we can do something with.
 	useEffect(() => {
 		(async () => {
 			try {
