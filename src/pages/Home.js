@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Button from '../components/Button';
 
 export default function Home(props) {
 	const [bookmarks, setBookmarks] = useState([]); // <----- Bookmarks State
@@ -18,8 +19,14 @@ export default function Home(props) {
 		})();
 	}, []);
 
+	const onClick = () => {
+		console.log('You clicked me Jason!');
+	};
+
 	return (
-		<div className="HomePage">
+		<div className="container">
+			<h1>This is the {props.page} Page</h1>
+			<Button color="green" text="Add" onClick={onClick} />
 			<ul>
 				{bookmarks.map(bookmark => {
 					return (
