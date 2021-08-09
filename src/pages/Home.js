@@ -6,6 +6,8 @@ import Header from '../components/Header';
 
 export default function Home(props) {
 	const [bookmarks, setBookmarks] = useState([]); // <----- Bookmarks State
+
+	// ↓↓↓↓↓↓ For showing and hiding the create form via a btn. ↓↓↓↓↓
 	const [showAddBookmark, setShowAddBookmark] = useState(false);
 
 	// ↓↓↓↓↓↓ After the component mounts ↓↓↓↓↓
@@ -46,7 +48,11 @@ export default function Home(props) {
 
 	return (
 		<div className="container">
-			<Header title="Welcome to the Jungle" />
+			<Header
+				title="Welcome to the Jungle"
+				onAdd={() => setShowAddBookmark(!showAddBookmark)}
+				showAdd={showAddBookmark}
+			/>
 			{showAddBookmark && <AddBookmark onAdd={addBookmark} />}
 			<Button color="green" text="Add" onClick={onAdd} />
 			<h3>Click on a title to edit or delete</h3>
