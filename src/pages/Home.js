@@ -41,11 +41,6 @@ export default function Home(props) {
 		}
 	};
 
-	// ===== For the hide and show form button =====
-	const onAdd = () => {
-		setShowAddBookmark(!showAddBookmark);
-	};
-
 	return (
 		<div className="container">
 			<Header
@@ -54,7 +49,6 @@ export default function Home(props) {
 				showAdd={showAddBookmark}
 			/>
 			{showAddBookmark && <AddBookmark onAdd={addBookmark} />}
-			<Button color="green" text="Add" onClick={onAdd} />
 			<h3>Click on a title to edit or delete</h3>
 			<ul>
 				{bookmarks.map(bookmark => {
