@@ -18,19 +18,24 @@ const AddBookmark = ({ onAdd }) => {
 	};
 
 	return (
-		<form className="add-form" onSubmit={onSubmit}>
-			<div className="form-control">
-				<label>Title</label>
+		<form onSubmit={onSubmit}>
+			<div className="mb-3">
+				<label className="form-label">Title</label>
 				<input
+					className="form-control"
 					type="text"
 					placeholder="Add Bookmark"
 					value={title}
 					onChange={e => setTitle(e.target.value)}
 				/>
+				<div className="form-text">
+					We'll always share your email with everyone.
+				</div>
 			</div>
-			<div className="form-control">
-				<label>url</label>
+			<div className="mb-3">
+				<label className="form-label">url</label>
 				<input
+					className="form-control"
 					type="text"
 					placeholder="Add url"
 					value={url}
@@ -38,7 +43,7 @@ const AddBookmark = ({ onAdd }) => {
 				/>
 			</div>
 
-			<input type="submit" value="Save Task" className="btn btn-block" />
+			<input type="submit" value="Save Task" className="btn btn-primary mb-3" />
 		</form>
 	);
 };

@@ -22,6 +22,8 @@ export default function Show(props) {
 			setBookmark(data);
 		} catch (error) {
 			console.error(error);
+		} finally {
+			window.location.assign('/'); // Send us back to '/Home' / reload everyting. Had to change it to '/'
 		}
 	};
 
@@ -49,38 +51,58 @@ export default function Show(props) {
 		} catch (error) {
 			console.error(error);
 		} finally {
-			window.location.assign('/Home'); // Send us back to /Home / reload everyting.
+			window.location.assign('/'); // Send us back to '/Home' / reload everyting. Had to change it to '/'
 		}
 	};
 
 	return (
-		<div className="ShowPage">
+		<div className="container">
 			{Object.keys(bookmark).length ? (
 				<>
 					<h3>{bookmark.title}</h3>
 					<a href={bookmark.url}>{bookmark.url}</a>
-					<button onClick={handleDelete}>DELETE ME</button>
 				</>
 			) : (
 				<h1>Loading...</h1>
 			)}
-			<form
-				style={{
-					display: 'flex',
-					flexDirection: 'column'
-				}}
-				onSubmit={handleUpdate}
-			>
-				<label>
-					{' '}
-					Title:{' '}
-					<input type="text" ref={titleInput} defaultValue={bookmark.title} />
-				</label>
-				<label>
-					{' '}
-					Url: <input type="text" ref={urlInput} defaultValue={bookmark.url} />
-				</label>
-				<input type="submit" value="Update Bookmark" />
+			<form onSubmit={handleUpdate}>
+				<div className="mb-3">
+					<label className="form-label">Title</label>
+					<input
+						type="text"
+						className="form-control"
+						ref={titleInput}
+						defaultValue={bookmark.title}
+					/>
+				</div>
+				<div className="mb-3">
+					<label className="form-label">Url</label>
+					<input
+						type="text"
+						className="form-control"
+						ref={urlInput}
+						defaultValue={bookmark.url}
+					/>
+					<div className="form-text">
+						Whatever you put in here with be a link.
+					</div>
+				</div>
+				<div className="d-inline">
+					<input
+						className="btn btn-primary"
+						type="submit"
+						value="Update Bookmark"
+					/>
+				</div>
+				<div className="d-inline p-2">
+					<button
+						className="btn btn-danger"
+						onClick={handleDelete}
+						type="button"
+					>
+						DELETE ME
+					</button>
+				</div>
 			</form>
 		</div>
 	);

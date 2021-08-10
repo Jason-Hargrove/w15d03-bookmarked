@@ -42,18 +42,17 @@ export default function Home(props) {
 	};
 
 	return (
-		<div className="container">
+		<div className="container mt-3">
 			<Header
-				title="Welcome to the Jungle"
+				title="It's the bookmark page"
 				onAdd={() => setShowAddBookmark(!showAddBookmark)}
 				showAdd={showAddBookmark}
 			/>
 			{showAddBookmark && <AddBookmark onAdd={addBookmark} />}
-			<h3>Click on a title to edit or delete</h3>
-			<ul>
+			<ul className="list-group">
 				{bookmarks.map(bookmark => {
 					return (
-						<li key={bookmark._id}>
+						<li key={bookmark._id} className="list-group-item">
 							<Link to={`/${bookmark._id}`}>
 								<h3>{bookmark.title}</h3>
 							</Link>
