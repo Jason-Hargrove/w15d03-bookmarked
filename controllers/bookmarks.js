@@ -8,7 +8,7 @@ router.post('/', async (req, res) => {
     res.status(200).json(createdBookmark)
   } catch (error) {
     console.error(error) // <---- For the Backend Developer.
-    res.status(404).json({message: error.message}) // <---- For the Front End Developer.
+    res.status(400).json({message: error.message}) // <---- For the Front End Developer.
   }
 })
 

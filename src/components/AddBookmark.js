@@ -8,7 +8,7 @@ const AddBookmark = ({ onAdd }) => {
 	const onSubmit = e => {
 		e.preventDefault();
 
-		if (!title) {
+		if (!title || !url) {
 			alert('Please add a bookmark');
 			return;
 		}
@@ -43,7 +43,7 @@ const AddBookmark = ({ onAdd }) => {
 				/>
 			</div>
 
-			<input type="submit" value="Save Task" className="btn btn-primary mb-3" />
+			<input type="submit" value="Save Bookmark" className="btn btn-primary mb-3" />
 		</form>
 	);
 };
